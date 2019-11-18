@@ -1,0 +1,120 @@
+//This is the tool to help players and GMs create and manage the domains in their games
+
+//Started 11/13/2019 by Matthew Herold
+
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+
+void createNewDomain(void);
+void createNewHideout(void);
+void loadPreviousDomain(void);
+
+class Stronghold
+{
+private:
+	int strongholdValue;
+	std::string strongholdType;
+
+public:
+	int chooseStructures(int strongholdValue);
+};
+
+int Stronghold::chooseStructures(int strongholdValue)
+{
+	int continueStronghold = 0;
+
+	std::vector<int> structureList;
+	structureList.reserve(15);
+
+	do
+	{
+		std::cout << "\nPlease select one or more structures to add to your stronghold:\n\n";
+		std::cout << "1. Barbican (gatehouse, 2 small towers, and a drawbridge) - 38,000\n2. Battlement (100' long, crenellated parapets)\n3.Building, stone (20' high, 30' square, wood doors, floors, roof, stairs)*";
+		std::cout << "\n4.Building, wood(20' high, 30' square, wood doors, floors, roof, stairs)* \n5.Corridor, dungeon(10' x 10' x 10', hewn stone walls, flagstone floor)\n6. Drawbridge, wood (10' x 20')";
+		std::cout << "\n7.Gatehouse(20' high, 30' x 20', metal portcullis, wood doors, floors, stairs)\n8.Keep, square(80' high, 60' square, wood doors, floors, stairs)* \n9.Moat, unfilled(100' x 20' x 10' deep)*";
+		std::cout << "\n10.Moat, filled(100' x 20' x 10' deep)\n11.Palisade, wood(10' high, 100' long, 1' thick)\n12.Rampart, earthen(10' high, 100' long, 15' thick)\n13.Tower, small round(30' high, 20' diameter, wood doors, floors, roof, stairs)";
+		std::cout << "\n14.Tower, medium round(40' high, 20' diameter, wood doors, floors, roof, stairs)\n15.Tower, large round(40' high, 30' diameter, wood doors, floors, roof, stairs)\n16.Tower, huge round(60' high, 30' diameter, wood doors, floors, roof, stairs)";
+		std::cout << "\n17.Wall, stone castle(20' high, 100' long, 10' thick)\n18.Wall, stone castle(30' high, 100' long, 10' thick)\n19.Wall, stone castle(40' high, 100' long, 10' thick)\n20.Wall, stone castle(50' high, 100' long, 10' thick)";
+		std::cout << "\n21.Wall, stone castle(60' high, 100' long, 10' thick)\n\n*The dimensions of these constructions can be altered as long as the square footage remains the same.";
+		std::cout << "\n22. Done creating stronghold\n\n";
+
+		std::cin >> continueStronghold;
+		structureList.push_back(continueStronghold);
+
+	} while (continueStronghold != 22);
+	return 0;
+}
+
+int main(void)
+{
+	int menuChoice = 0;
+	bool menuTrue = false;
+
+	do
+	{
+
+		std::cout << ("Menu\n\n1. Create New Domain\n2. Load Previous Domain\n3. Exit?\n\n");
+
+		std::cin >> (menuChoice);
+
+		if (menuChoice == 1)
+		{
+			int newHideout;
+
+			std::cout << "\nAre we constructing a hideout?\n1.Yes\n2. No\n\n";
+			std::cin >> newHideout;
+
+			if (newHideout == 1)
+			{
+				createNewHideout();
+			}
+
+			else
+			{
+				createNewDomain();
+			}
+			
+		}
+
+		else if (menuChoice == 2)
+		{
+			loadPreviousDomain();
+		}
+
+		else if (menuChoice == 3)
+		{
+			menuTrue = true;
+		}
+
+		else
+		{
+			std::cout << "Error.  Please select a valid option.\n\n";
+
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+
+	} while (menuTrue != true);
+}
+
+void createNewDomain(void)
+{
+	int strongholdValue = 0;
+	std::cout << "\nWe begin by building a stronghold!\n\n";
+
+	Stronghold NewStronghold;
+	NewStronghold.chooseStructures(strongholdValue);
+}
+
+void createNewHideout(void)
+{
+	std::cout << "\nWe're creating a new hideout!";
+}
+
+void loadPreviousDomain(void)
+{
+	std::cout << "\nYou're loading a previous domain!\n\n";
+}
